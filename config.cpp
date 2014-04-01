@@ -25,6 +25,7 @@ class CfgWeapons {
 	class tb_lmg_pk_base : LMG_Zafir_F {
 		displayName = "PKP Pecheneg";
 		picture = "\tb_lmg_pk\data\pkp_ca.paa";
+		magazines[] = {"100Rnd_762x54_Box","100Rnd_762x54_Box_Tracer"};
 		model = "tb_lmg_pk\Pecheneg";
 		modes[] = {	"FullAuto","close","short","medium","far_optic1","far_optic2"};
 		discretedistance[] = {200, 300, 400, 500, 600, 700};
@@ -37,6 +38,9 @@ class CfgWeapons {
 		class FullAuto : FullAuto {
 			begin1[] = {"tb_lmg_pk\data\sounds\beltmachine_08_PK", 1.25893, 1, 1200};
 			begin2[] = {"tb_lmg_pk\data\sounds\beltmachine_08_PK", 1.25893, 1, 1200};
+			closure1[] = {"A3\sounds_f\weapons\zafir\zafir_sfx_3", 0.75, 1, 10};
+			closure2[] = {"A3\sounds_f\weapons\zafir\zafir_sfx_4", 0.75, 1, 10};
+			reloadTime = 0.08;
 		};
 		class close: FullAuto {
 			airateoffire = 0.5;
@@ -96,8 +100,46 @@ class CfgWeapons {
 			minrangeprobab = 0.05;
 			requiredoptictype = 2;
 		};		
-	};
+		class WeaponSlotsInfo: WeaponSlotsInfo {
+			mass = 99;
+			class MuzzleSlot: MuzzleSlot {compatibleitems[] = {};};
+			class CowsSlot: CowsSlot {compatibleitems[] = {};};
+			class PointerSlot: PointerSlot {compatibleitems[] = {};};
+		};	
+
+		};
 	class tb_lmg_pkp : tb_lmg_pk_base {
 		scope = 2;
+	};
+};
+
+class CfgMagazines {
+	class 150Rnd_762x51_Box;
+	class 100Rnd_762x54_Box : 150Rnd_762x51_Box {
+		displayname = "7.62mmR 100Rnd Box";
+		displaynameshort = "7.62x54mmR";
+		descriptionshort = "Caliber: 7.62x54mmR<br/>Rounds: 100<br />Used in: PKP/PKM";
+		ammo = "tb_B_762x54";
+		tracersevery = 0;
+		lastroundstracer = 4;
+		initspeed = 825;
+		picture = "\tb_lmg_pk\data\m_pk_ca.paa";
+	};
+	class 100Rnd_762x54_Box_Tracer : 100Rnd_762x54_Box {
+		displayname = "7.62mmR 100Rnd Tracer Box";
+		displaynameshort = "Tracer";
+		descriptionshort = "Caliber: 7.62x54mmR Tracer<br/>Rounds: 100<br />Used in: PKP/PKM";
+		tracersevery = 4;	
+		lastroundstracer = 4;
+	};
+
+};
+
+class CfgAmmo {
+	class B_762x51_Ball;
+	class tb_B_762x54 : B_762x51_Ball {
+		model = "\A3\Weapons_f\Data\bullettracer\tracer_green";
+		typicalspeed = 750;
+		deflecting = 20;
 	};
 };
